@@ -10,7 +10,11 @@ const TableUser = (props) => {
     //const [listUser, setListUser] = useState()
 
     const dispatch = useDispatch()
+
     const listUser = useSelector((state) => state.user.listUser)
+    const isLoading = useSelector((state) => state.user.isLoading)
+    const isError = useSelector((state) => state.user.isError)
+
 
     // const fetchAllUser = async () => {
     //     const res = await axios.get("http://localhost:8080/users/all")
@@ -40,21 +44,39 @@ const TableUser = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {listUser && listUser.length > 0 && listUser.map((item, index) => {
-                        return (
-                            <tr key={`users-${index}`}>
-                                <td>{index + 1}</td>
-                                <td>{item.email}</td>
-                                <td>{item.username}</td>
-                                <td>
-                                    <button
-                                        className='btn btn-danger'
-                                        onClick={() => handleDeleteUser(item)}
-                                    >Delete</button>
-                                </td>
-                            </tr>
-                        )
-                    })}
+                    {isError === true ?
+                        <>
+                            <div>Something Wrong bro!!!!</div>
+                        </>
+                        :
+                        <>
+                            {isLoading === true ?
+
+                                <><div>Loading...</div></>
+
+                                :
+                                <>
+                                    {listUser && listUser.length > 0 && listUser.map((item, index) => {
+                                        return (
+                                            <tr key={`users-${index}`}>
+                                                <td>{index + 1}</td>
+                                                <td>{item.email}</td>
+                                                <td>{item.username}</td>
+                                                <td>
+                                                    <button
+                                                        className='btn btn-danger'
+                                                        onClick={() => handleDeleteUser(item)}
+                                                    >Delete</button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </>
+                            }
+                        </>
+
+                    }
+
 
 
                 </tbody>
