@@ -2,7 +2,8 @@ import {
     FETCH_USER_REQUEST, FETCH_USER_SUCCESS,
     FETCH_USER_ERROR,
     CREATE_USER_REQUEST, CREATE_USER_SUCCESS,
-    CREATE_USER_ERROR
+    CREATE_USER_ERROR,
+    //DELETE_USER_SUCCESS
 } from '../action/types';
 
 
@@ -63,6 +64,10 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 isCreating: false
             }
+        // case DELETE_USER_SUCCESS:
+        //     return {
+        //         ...state
+        //     }
 
         default: return state;
 
